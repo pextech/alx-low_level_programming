@@ -11,7 +11,7 @@ char c1, c2;
 
 for (c1 = 'x'; c1 <= 'y'; c1++)
 {
-putchar(c);
+putchar(c1);
 }
 for (c2 = 'X'; c2 <= 'Y'; c2++)
 {
