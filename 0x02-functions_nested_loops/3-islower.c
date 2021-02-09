@@ -8,9 +8,9 @@
  * Return: it returns 1 it is lowercase and 0 otherwise
  */
 
-int _islower(int lower)
+int _islower(int c)
 {
-if (lower >= 'a' && lower <= 'z')
+if (c >= 'a' && c <= 'z')
 {
 return (1);
 }
