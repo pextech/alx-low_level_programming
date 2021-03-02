@@ -1,32 +1,34 @@
+#include "holberton.h"
 #include <stdlib.h>
-
 /**
-* alloc_grid - 2d arrays
-* @width: Width
-* @height: Height
-* Return: grid
-*/
-
+ * alloc_grid - function that creates a two dimenstional array
+ * @width: the length of the array
+ * @height: the height of the array
+ *
+ * Return: the two dimensional array
+ **/
 int **alloc_grid(int width, int height)
 {
-int **grid, in = height;
-int i;
+int **newarray;
+int i, j, k;
 
 if (width <= 0 || height <= 0)
-return (0);
-
-grid = malloc(height * sizeof(int *));
-if (!grid)
-return (0);
-
-while (height-- > 0)
+return (NULL);
+newarray = malloc(height * sizeof(int *));
+if (newarray == NULL)
+return (NULL);
+for (i = 0; i < height; i++)
 {
-grid[height] = malloc(width * sizeof(int));
-if (!grid[height])
-return (0);
+newarray[i] = malloc(width * sizeof(int));
+if (newarray[i] == NULL)
+{
+for (j = 0 ; j <= i; j++)
+free(newarray[j]);
+free(newarray);
+return (NULL);
 }
-for (height = 0; height < in; height++)
-for (i = 0; i < width; i++)
-grid[height][i] = 0;
-return (grid);
+for (k = 0; k < width; k++)
+newarray[i][k] = 0;
+}
+return (newarray);
 }

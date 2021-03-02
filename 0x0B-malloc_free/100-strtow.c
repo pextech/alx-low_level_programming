@@ -1,89 +1,92 @@
+#include "holberton.h"
 #include <stdlib.h>
-
+int findsize(char *s);
+int findletterslength(char *s, int index);
 /**
- * strtow - char
- * @str: pointer to string params
- * Return: char
- */
-
+ * strtow - function that splits string into words
+ * @str: the string to be splitted
+ *
+ * Return: array of words
+ **/
 char **strtow(char *str)
 {
-int i = 0, j = 0, k = 0;
-int len = 0, count = 0;
-char **f, *col;
+char **newarray;
+int i, j, k, size, wordlen, index;
 
-if (!str || !*str)
+index = 0;
+if (str == NULL || str[0] == '\0')
+return (NULL);
+size = findsize(str);
+if (size == 0)
+return (NULL);
+newarray = malloc((size + 1) * sizeof(char *));
+if (newarray == NULL)
+return (NULL);
+
+for (i = 0; i < size; i++)
 {
-
+while (str[index] == ' ' && str[index])
+index++;
+wordlen = findletterslength(str, index);
+newarray[i] = malloc((wordlen + 1) * sizeof(char));
+if (newarray[i] == NULL)
+{
+for (j = 0 ; j <= i; j++)
+free(newarray[j]);
+free(newarray);
 return (NULL);
 }
+for (k = 0; k < wordlen; k++)
+{
+newarray[i][k] = str[index];
+index++;
+}
+newarray[i][k] = '\0';
+}
+newarray[i] = NULL;
+return (newarray);
+}
+/**
+ * findletterslength -  find the length of a single word
+ * @s: the given string
+ * @index: the start index of the word
+ *
+ * Return: the length of a word
+ **/
+int findletterslength(char *s, int index)
+{
+int wordlen;
 
-while (*(str + i))
+wordlen = 0;
+while (s[index] && s[index] != '\0' && s[index] != ' ')
 {
-if (*(str + i) != ' ')
+wordlen++;
+index++;
+}
+return (wordlen);
+}
+/**
+ * findsize - function this is used to find a size of a string
+ * @s: the given string
+ *
+ * Return: the size of the string
+ **/
+int findsize(char *s)
 {
-if (*(str + i + 1) == ' ' || *(str + i + 1) == 0)
+int size = 0;
+int index = 0;
+
+while (s[index])
 {
-count += 1;
+if (s[index] != '\0' && s[index] != ' ')
+{
+size++;
+index += findletterslength(s, index);
+}
+else
+{
+index++;
 }
 }
-i++;
-}
-
-if (count == 0)
-{
-
-return (NULL);
-}
-count += 1;
-f = malloc(sizeof(char *) * count);
-
-if (!f)
-{
-
-return (NULL);
-}
-i = 0;
-
-while (*str)
-{
-while (*str == ' ' && *str)
-{
-str++;
-}
-len = 0;
-
-while (*(str + len) != ' ' && *(str + len))
-{
-len += 1;
-}
-len += 1;
-col = malloc(sizeof(char) * len);
-
-if (!col)
-{
-for (k = j - 1; k >= 0; k--)
-{
-free(f[k]);
-}
-free(f);
-
-return (NULL);
-}
-
-for (k = 0; k < (len - 1);  k++)
-{
-*(col + k) = *(str++);
-}
-*(col + k) = '\0';
-*(f + j) = col;
-
-if (j < (count - 1))
-{
-j++;
-}
-}
-*(f + j) = NULL;
-
-return (f);
+return (size);
 }
