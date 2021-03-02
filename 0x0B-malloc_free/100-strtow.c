@@ -14,6 +14,7 @@ char **f, *col;
 
 if (!str || !*str)
 {
+
 return (NULL);
 }
 
@@ -31,6 +32,7 @@ i++;
 
 if (count == 0)
 {
+
 return (NULL);
 }
 count += 1;
@@ -38,6 +40,7 @@ f = malloc(sizeof(char *) * count);
 
 if (!f)
 {
+
 return (NULL);
 }
 i = 0;
@@ -64,6 +67,7 @@ for (k = j - 1; k >= 0; k--)
 free(f[k]);
 }
 free(f);
+
 return (NULL);
 }
 
@@ -80,5 +84,6 @@ j++;
 }
 }
 *(f + j) = NULL;
+
 return (f);
 }
