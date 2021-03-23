@@ -6,7 +6,7 @@
  * @head: pointer to head of linked list
  * @index: index at which node will be deleted
  *
- * Return: 1 if it succeeded, -1 if it failed
+ * Return: 1 if it succeeded, -1 if it failed.
  */
 int delete_nodeint_at_index(listint_t **head, unsigned int index)
 {
